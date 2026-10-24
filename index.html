@@ -106,7 +106,7 @@
                 <div class="bg-blue-600/30 p-3 rounded-2xl text-blue-300 border border-blue-400/30"><i class="fa-solid fa-bullhorn text-xl"></i></div>
                 <div>
                     <h2 class="font-bold text-white text-sm sm:text-base">ยินดีต้อนรับสู่ MARS PRESS 24 จำหน่าย Account ทุกแพลตฟอร์ม ✨</h2>
-                    <p class="text-xs text-blue-200">เติมเครดิตเข้าระบบก่อนสั่งซื้อ สะดวกรวดเร็ว ปลอดภัย 100%</p>
+                    <p class="text-xs text-blue-200">เติมเครดิตด้วยระบบสลิป ยอดเข้าบัญชีทันที 24 ชม.</p>
                 </div>
             </div>
             <button onclick="playCuteSound(); fetchDataFromSheet(true)" class="bg-white/10 hover:bg-white/20 text-xs font-semibold px-3.5 py-2 rounded-xl text-white border border-white/20 transition-all flex items-center space-x-1 whitespace-nowrap">
@@ -128,10 +128,10 @@
         <section id="page-topup" class="tab-content hidden">
             <div class="max-w-2xl mx-auto bg-white rounded-3xl p-6 shadow-sm border border-blue-100 space-y-6">
                 <div class="flex items-center space-x-3 mb-2 border-b border-gray-100 pb-3">
-                    <i class="fa-solid fa-wallet text-2xl text-emerald-500"></i>
+                    <i class="fa-solid fa-bolt text-2xl text-emerald-500"></i>
                     <div>
-                        <h2 class="text-xl font-bold text-navyDark">เติมเงิน / เติมเครดิตเข้าระบบ</h2>
-                        <p class="text-xs text-gray-500">โอนเงินผ่านบัญชีธนาคารหรือวอเลทของร้าน แล้วแจ้งสลิปเพื่อเติมเครดิต</p>
+                        <h2 class="text-xl font-bold text-navyDark">เติมเงินทันที (ไม่ต้องรออนุมัติ)</h2>
+                        <p class="text-xs text-gray-500">ใส่ยอดเงิน แนบรูปสลิป ยอดเงินจะเข้าบัญชีทันที!</p>
                     </div>
                 </div>
 
@@ -144,27 +144,27 @@
                 <form onsubmit="handleTopupSubmit(event)" class="space-y-4">
                     <div>
                         <label class="block text-xs font-semibold text-gray-700 mb-1">ยอดเงินที่โอน (บาท)</label>
-                        <input type="number" id="topupAmountInput" required min="1" placeholder="เช่น 100" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="number" id="topupAmountInput" required min="1" placeholder="เช่น 100" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-gray-700 mb-1">อัปโหลดรูปสลิปโอนเงิน</label>
-                        <input type="file" id="topupSlipFile" accept="image/*" required onchange="compressTopupImage(this)" class="w-full text-xs text-gray-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        <label class="block text-xs font-semibold text-gray-700 mb-1">อัปโหลดรูปสลิปโอนเงินจากมือถือ</label>
+                        <input type="file" id="topupSlipFile" accept="image/*" required onchange="compressTopupImage(this)" class="w-full text-xs text-gray-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100">
                         <div id="topupPreviewContainer" class="mt-2 text-center hidden">
                             <img id="topupPreviewImg" src="" class="w-24 h-24 object-cover rounded-xl mx-auto border border-gray-200 shadow-sm">
-                            <span class="text-[10px] text-emerald-600 block mt-1 font-semibold">บีบอัดรูปและพร้อมส่งแล้ว ✓</span>
+                            <span class="text-[10px] text-emerald-600 block mt-1 font-semibold">บีบอัดรูปพร้อมเติมเงิน ✓</span>
                         </div>
                     </div>
                     <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-sm shadow-md transition-all">
-                        <i class="fa-solid fa-paper-plane mr-1"></i> แจ้งเติมเงิน
+                        <i class="fa-solid fa-bolt mr-1"></i> ยืนยันเติมเงิน (ยอดเข้าทันที)
                     </button>
                 </form>
 
                 <div class="pt-4 border-t border-gray-100">
-                    <h3 class="font-bold text-sm text-navyDark mb-3">ประวัติการแจ้งเติมเงินของฉัน</h3>
+                    <h3 class="font-bold text-sm text-navyDark mb-3">ประวัติการเติมเงินของฉัน</h3>
                     <div class="overflow-x-auto">
                         <table class="w-full text-left text-xs text-gray-600">
                             <thead class="bg-gray-100 text-gray-700 font-semibold rounded-xl">
-                                <tr><th class="p-2.5">วันที่</th><th class="p-2.5">ยอดโอน</th><th class="p-2.5">스ลิป</th><th class="p-2.5">สถานะ</th></tr>
+                                <tr><th class="p-2.5">วันที่</th><th class="p-2.5">ยอดโอน</th><th class="p-2.5">สลิป</th><th class="p-2.5">สถานะ</th></tr>
                             </thead>
                             <tbody id="myTopupHistoryBody" class="divide-y divide-gray-100"></tbody>
                         </table>
@@ -266,20 +266,20 @@
                 <div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-4 border-b border-gray-100 gap-4">
                     <div>
                         <h2 class="text-xl font-bold text-navyDark flex items-center"><i class="fa-solid fa-sliders text-blue-600 mr-2"></i> ระบบจัดการหลังบ้าน MARS PRESS 24</h2>
-                        <p class="text-xs text-gray-500">อนุมัติยอดเติมเงิน จัดการสต๊อก และตั้งค่าร้าน</p>
+                        <p class="text-xs text-gray-500">ตรวจสอบประวัติสลิปเติมเงิน จัดการสต๊อก และตั้งค่าร้าน</p>
                     </div>
                     <button onclick="playCuteSound(); adminLogout()" class="bg-rose-100 hover:bg-rose-200 text-rose-600 text-xs font-bold px-3 py-2 rounded-xl transition-all">
                         <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i> ออกจากแอดมิน
                     </button>
                 </div>
 
-                <!-- Admin Topup Approvals -->
+                <!-- Admin Topup History -->
                 <div class="bg-emerald-50/50 p-5 rounded-2xl border border-emerald-200 space-y-3">
-                    <h3 class="font-bold text-sm text-emerald-900 flex items-center"><i class="fa-solid fa-wallet mr-1.5 text-emerald-600"></i> รายการแจ้งเติมเงินรออนุมัติ</h3>
+                    <h3 class="font-bold text-sm text-emerald-900 flex items-center"><i class="fa-solid fa-receipt mr-1.5 text-emerald-600"></i> ประวัติสลิปการเติมเงินลูกค้าทั้งหมด</h3>
                     <div class="overflow-x-auto max-h-72 overflow-y-auto">
                         <table class="w-full text-left text-xs text-gray-600">
                             <thead class="bg-emerald-100 text-emerald-900 font-semibold sticky top-0">
-                                <tr><th class="p-2.5">ลูกค้า</th><th class="p-2.5">ยอดโอน</th><th class="p-2.5">สลิป</th><th class="p-2.5">วันที่</th><th class="p-2.5">จัดการ</th></tr>
+                                <tr><th class="p-2.5">ลูกค้า</th><th class="p-2.5">ยอดโอน</th><th class="p-2.5">สลิป</th><th class="p-2.5">วันที่เติม</th><th class="p-2.5">สถานะ</th></tr>
                             </thead>
                             <tbody id="adminTopupTableBody" class="divide-y divide-gray-100 bg-white"></tbody>
                         </table>
@@ -466,8 +466,8 @@
 
         let products = [];
         let orders = [];
-        let topupRequests = []; // [{ id, username, amount, slipUrl, status, date }]
-        let userBalances = {}; // { username: balance } (เริ่มต้นทุกคนเป็น 0)
+        let topupRequests = [];
+        let userBalances = {};
 
         let shopSettings = {
             rules: "1. ยกฮอตเมล มี2ชั้น\n2. เฟสเขียว ไม่ซ้อน มีประกันดึงตลอดชีพ\n3. หากพบปัญหากรุณาติดต่อแอดมินทาง LINE: @577ctyqa",
@@ -560,7 +560,6 @@
             if (!username) return;
             currentUser = { username: username };
             
-            // ถ้าผู้ใช้นี้ยังไม่มีเครดิต ให้เซ็ตเป็น 0
             if (userBalances[currentUser.username] === undefined) {
                 userBalances[currentUser.username] = 0;
             }
@@ -622,6 +621,7 @@
             reader.readAsDataURL(file);
         }
 
+        // เติมเครดิตเข้าทันที ไม่ต้องรอแอดมินอนุมัติ
         function handleTopupSubmit(e) {
             e.preventDefault();
             if (!currentUser) { openAuthModal(); return; }
@@ -632,17 +632,27 @@
             }
 
             playCuteSound();
+
+            // 1. ปรับเพิ่มยอดเงินให้ผู้ใช้ทันที
+            if (userBalances[currentUser.username] === undefined) {
+                userBalances[currentUser.username] = 0;
+            }
+            userBalances[currentUser.username] += amount;
+
+            // 2. บันทึกประวัติสลิปไว้ดูหลังบ้าน
             const newRequest = {
                 id: 'TOP-' + Math.floor(100000 + Math.random() * 900000),
                 username: currentUser.username,
                 amount: amount,
                 slipUrl: compressedTopupSlip,
-                status: 'pending', // pending, approved
+                status: 'completed', // เข้าทันที
                 date: new Date().toLocaleString('th-TH')
             };
 
             topupRequests.unshift(newRequest);
             saveAllDataToSheet(false);
+            
+            updateUserUI();
             renderTopupHistory();
             renderAdminView();
 
@@ -653,8 +663,8 @@
 
             Swal.fire({
                 icon: 'success',
-                title: 'แจ้งเติมเงินสำเร็จ!',
-                text: 'กรุณารอแอดมินตรวจสอบและอนุมัติเครดิตเข้าบัญชี',
+                title: 'เติมเงินสำเร็จ!',
+                text: `เติมเครดิตเข้าบัญชีจำนวน ${amount} บาท เรียบร้อยแล้ว`,
                 timer: 2000,
                 showConfirmButton: false
             });
@@ -670,16 +680,12 @@
                 return;
             }
             myRequests.forEach(r => {
-                let statusBadge = r.status === 'approved' 
-                    ? '<span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">อนุมัติแล้ว</span>' 
-                    : '<span class="bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold">รอตรวจสอบ</span>';
-                
                 tbody.innerHTML += `
                     <tr>
                         <td class="p-2.5 text-gray-500 text-[11px]">${r.date}</td>
                         <td class="p-2.5 font-bold text-navyDark">${r.amount} ฿</td>
                         <td class="p-2.5"><img src="${r.slipUrl}" class="w-8 h-8 object-cover rounded cursor-pointer border" onclick="showFullImage('${r.slipUrl}')"></td>
-                        <td class="p-2.5">${statusBadge}</td>
+                        <td class="p-2.5"><span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">สำเร็จ (เข้าทันที)</span></td>
                     </tr>
                 `;
             });
@@ -754,7 +760,6 @@
                 confirmButtonColor: '#1E3E62'
             }).then(result => {
                 if (result.isConfirmed) {
-                    // หักเงินเครดิต
                     userBalances[currentUser.username] -= product.price;
                     updateUserUI();
                     executePurchase(product);
@@ -880,44 +885,24 @@
             Swal.fire('สำเร็จ', 'บันทึกสินค้าเรียบร้อย', 'success');
         }
 
-        function approveTopup(topupId) {
-            playCuteSound();
-            const req = topupRequests.find(r => r.id === topupId);
-            if (!req || req.status === 'approved') return;
-
-            req.status = 'approved';
-            if (userBalances[req.username] === undefined) {
-                userBalances[req.username] = 0;
-            }
-            userBalances[req.username] += req.amount;
-
-            saveAllDataToSheet(false);
-            renderAdminView();
-            renderTopupHistory();
-            Swal.fire('อนุมัติสำเร็จ', `เติมเครดิต ${req.amount} ฿ ให้ผู้ใช้ ${req.username} เรียบร้อย`, 'success');
-        }
-
         function renderAdminView() {
             updateProductSelectDropdown();
 
-            // Admin topup table
+            // Admin topup history table
             const topupTbody = document.getElementById('adminTopupTableBody');
             if (topupTbody) {
                 topupTbody.innerHTML = '';
-                const pendingReqs = topupRequests.filter(r => r.status === 'pending');
-                if (pendingReqs.length === 0) {
-                    topupTbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-gray-400 text-xs">ไม่มีรายการเติมเงินรออนุมัติ</td></tr>`;
+                if (topupRequests.length === 0) {
+                    topupTbody.innerHTML = `<tr><td colspan="5" class="text-center py-4 text-gray-400 text-xs">ไม่มีประวัติการเติมเงิน</td></tr>`;
                 } else {
-                    pendingReqs.forEach(r => {
+                    topupRequests.forEach(r => {
                         topupTbody.innerHTML += `
                             <tr>
                                 <td class="p-2.5 font-bold text-gray-800">${r.username}</td>
                                 <td class="p-2.5 text-emerald-600 font-bold">${r.amount} ฿</td>
                                 <td class="p-2.5"><img src="${r.slipUrl}" class="w-8 h-8 object-cover rounded cursor-pointer border" onclick="showFullImage('${r.slipUrl}')"></td>
                                 <td class="p-2.5 text-[11px] text-gray-400">${r.date}</td>
-                                <td class="p-2.5">
-                                    <button onclick="approveTopup('${r.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1 rounded-lg text-xs">อนุมัติ</button>
-                                </td>
+                                <td class="p-2.5"><span class="bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full font-bold">เข้าแล้ว</span></td>
                             </tr>
                         `;
                     });
