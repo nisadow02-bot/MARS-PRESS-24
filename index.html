@@ -397,6 +397,7 @@
 
         let currentUser = null;
         let isAdminLoggedIn = false;
+        let compressedSlipBase64 = "";
 
         let products = [];
         let orders = [];
@@ -556,7 +557,8 @@
                 return;
             }
 
-            // Popup ให้กรอกยอดเงินและแนบลิงก์สลิปโอนเงิน
+            compressedSlipBase64 = ""; // รีเซ็ตค่ารูปสลิปใหม่
+
             Swal.fire({
                 title: 'ยืนยันการชำระเงินและสั่งซื้อ',
                 html: `
@@ -568,9 +570,12 @@
                             <input type="number" id="inputPaidAmount" value="${product.price}" class="w-full px-3 py-2 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-gray-700 mb-1">ลิงก์รูปสลิปโอนเงิน (Image URL)</label>
-                            <input type="text" id="inputSlipUrl" placeholder="วางลิงก์รูปภาพสลิป เช่น https://..." class="w-full px-3 py-2 rounded-xl border border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <p class="text-[10px] text-gray-400 mt-1">แนะนำอัปโหลดรูปสลิปผ่านเว็บฝากรูปแล้วนำลิงก์มาวาง</p>
+                            <label class="block text-xs font-semibold text-gray-700 mb-1">อัปโหลดรูปสลิปจากมือถือ</label>
+                            <input type="file" id="slipFileInput" accept="image/*" onchange="compressImage(this)" class="w-full text-xs text-gray-500 file:mr-2 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            <div id="slipPreviewContainer" class="mt-2 text-center hidden">
+                                <img id="slipPreviewImg" src="" class="w-20 h-20 object-cover rounded-lg mx-auto border border-gray-200">
+                                <span class="text-[10px] text-emerald-600 block mt-1">ย่อขนาดและพร้อมส่งแล้ว ✓</span>
+                            </div>
                         </div>
                     </div>
                 `,
@@ -580,17 +585,63 @@
                 confirmButtonColor: '#1E3E62',
                 preConfirm: () => {
                     const paidAmount = document.getElementById('inputPaidAmount').value;
-                    const slipUrl = document.getElementById('inputSlipUrl').value.trim();
-                    if (!paidAmount || !slipUrl) {
-                        Swal.showValidationMessage('กรุณากรอกยอดเงินและใส่ลิงก์รูปสลิปให้ครบถ้วน');
+                    if (!paidAmount || !compressedSlipBase64) {
+                        Swal.showValidationMessage('กรุณากรอกยอดเงินและอัปโหลดรูปสลิปให้เรียบร้อย');
                     }
-                    return { paidAmount, slipUrl };
+                    return { paidAmount, slipUrl: compressedSlipBase64 };
                 }
             }).then(result => {
                 if (result.isConfirmed) {
                     executePurchase(product, result.value.paidAmount, result.value.slipUrl);
                 }
             });
+        }
+
+        function compressImage(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_WIDTH = 300;
+                    const MAX_HEIGHT = 300;
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    if (width > height) {
+                        if (width > MAX_WIDTH) {
+                            height *= MAX_WIDTH / width;
+                            width = MAX_WIDTH;
+                        }
+                    } else {
+                        if (height > MAX_HEIGHT) {
+                            width *= MAX_HEIGHT / height;
+                            height = MAX_HEIGHT;
+                        }
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // แปลงเป็น JPEG และบีบอัดคุณภาพเหลือ 0.5 เพื่อให้ไฟล์มีขนาดเล็กมากๆ
+                    compressedSlipBase64 = canvas.toDataURL('image/jpeg', 0.5);
+                    
+                    // แสดงตัวอย่างรูปภาพย่อ
+                    const previewContainer = document.getElementById('slipPreviewContainer');
+                    const previewImg = document.getElementById('slipPreviewImg');
+                    if (previewContainer && previewImg) {
+                        previewImg.src = compressedSlipBase64;
+                        previewContainer.classList.remove('hidden');
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
 
         function executePurchase(product, paidAmount, slipUrl) {
